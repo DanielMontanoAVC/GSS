@@ -87,9 +87,15 @@ With a fisher test, we get a p-value of 0.01651, which is less than .05, which m
 
 Is there a difference in years of education (EDUC) between the those who did or did not vote in 2012 (VOTE12)?
 
+$H_0$ There is no difference in years of education and weather those did/didn't vote in 2012
+
+$H_A$ There is a difference in years of education and weather those did/didn't vote in 2012
+
 ## Methods
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!-->
+
+We have a numerical variable and a categorical variable, therefore we use Numerical~Cat helper file   
 
 ##Results
 
@@ -101,13 +107,48 @@ Is there a difference in years of education (EDUC) between the those who did or 
 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
+```{r}
+ggplot(GSSdata, aes(x = VOTE12, y = EDUC)) +
+  geom_boxplot() + 
+  labs(
+    title = "VOTE12 vs EDUC",
+    x = "VOTE12",
+    y = "EDUC"
+  )
+
+```
+
+The graph shows that those with more education, are more likely to vote as opposed to those with less education.
+
 #### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
+```{r}
+#Calculate summary stats
+summary_stats <-  GSSdata %>%
+  group_by(VOTE12) %>%
+  summarise(
+    Mean = mean(EDUC),
+    Median = median(EDUC),
+    SD = sd(EDUC)
+  )
+summary_stats
+```
+
+The mean of those who voted was slightly higher than those that did not vote, close to 3 point difference, and the median is the actual 3 point difference. This shows that there is a coloration between years of education and weather someone votes.
+
 ### Inferential Results
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
+
+```{r}
+anova_result <- aov(EDUC ~ VOTE12, data = GSSdata)
+summary(anova_result)
+
+```
+
+We have a p-value of 4.53e^-7 which is lower than 0.05, which means that we reject the null hypothesis, meaning there is a relationship between years of education and weather people voted or not in 2012
 
 #  Question 3
 
@@ -119,9 +160,15 @@ Determine if a persons performance on the wordsum test (WORDSUM) is independent 
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!-->
 
+$H_0$ There is no relationship in wordsum test scores and level of schooling
+
+$H_A$ There is a relationship in wordsum test scores and level of schooling
+
 ##Results
 
 <!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->
+
+
 
 ### Descriptive Results
 
