@@ -169,21 +169,38 @@ $H_A$ There is a relationship in wordsum test scores and level of schooling
 <!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->
 
 
-
 ### Descriptive Results
 
 #### Graphical Descriptive Results
 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
+```{r}
+plot(WORDSUM~DEGREE,data=GSSdata)
+```
+
+The graph shows that there is a relationship between level of education (DEGREE) and wordsum score (WORDSUM).
+
 #### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
+
+```{r}
+favstats(WORDSUM~DEGREE,data=GSSdata)
+```
+
+We see that the median data goes up in score as we go up in education level, the same is seen with the mean scores.
 
 ### Inferential Results
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
 
+```{r}
+model1 <- aov(WORDSUM~DEGREE,data=GSSdata)
+summary.aov(model1)
+```
+
+We now get 2.5e^-7 which is less than 0.05, which means we reject the null hypothsis.
 
 # Discussion and Conclusion
 
