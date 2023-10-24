@@ -200,9 +200,14 @@ model1 <- aov(WORDSUM~DEGREE,data=GSSdata)
 summary.aov(model1)
 ```
 
-We now get 2.5e^-7 which is less than 0.05, which means we reject the null hypothsis.
+We now get 2.5e^-7 which is less than 0.05, which means we reject the null hypothesis.
 
 # Discussion and Conclusion
 
 <!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
 
+1. Using the chisq and fisher tests, we get p-values of 0.02022 and 0.01651, both of which are lower that 0.05, which means both test reject the null hypothesis and show that there is a relation between owning/not owning a gun and standpoint on capital punishment.
+
+2.Using an anova test, we get a p-value of 4.53e^-7 which is much less than 0.05, which means that there is a difference in years of education and wether someone did/didn't vote in 2012.
+
+3.We find that we do have a relationship between levels of education and the wordsum test scores, seeing that they have a p-vlaue of 2.5e^^-7 which is much less than 0.05, which means we reject the null hypothesis.
